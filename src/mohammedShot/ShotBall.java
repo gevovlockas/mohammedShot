@@ -2,7 +2,7 @@ package mohammedShot;
 
 import lejos.util.Delay;
 
-public class ShotBall {
+public class ShotBall implements Runnable {
 
 	private int value;
 	private boolean running;
@@ -12,7 +12,7 @@ public class ShotBall {
 		running = true;
 	}
 
-	//@Override
+	@Override
 	public void run() {
 		while(running) {
 			System.out.println("value=" + value);

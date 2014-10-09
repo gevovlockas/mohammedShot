@@ -34,9 +34,9 @@ public class Init {
 		DataInputStream dis = connection.openDataInputStream();
         DataOutputStream dos = connection.openDataOutputStream();
         int read = 0;
-        Shot1 shot = new Shot1();
-//        Thread t = new Thread(shot);
-//        t.start();
+        ShotBall shot = new ShotBall();
+        Thread t = new Thread(shot);
+        t.start();
         boolean running = true;
         while (running){
 
