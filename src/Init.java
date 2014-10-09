@@ -1,4 +1,4 @@
-package mohammedShot;
+
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -21,6 +21,8 @@ public class Init {
 	 * 
 	 * */
 	public static void main(String[] args) {
+        int read = 0;
+        ShotBall shot = new ShotBall();
 		LCD.clear();
 		
 		RS485Connection connection = RS485.waitForConnection(0, NXTConnection.PACKET);
@@ -33,8 +35,6 @@ public class Init {
 		
 		DataInputStream dis = connection.openDataInputStream();
         DataOutputStream dos = connection.openDataOutputStream();
-        int read = 0;
-        ShotBall shot = new ShotBall();
         Thread t = new Thread(shot);
         t.start();
         boolean running = true;
