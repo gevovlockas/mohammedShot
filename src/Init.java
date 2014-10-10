@@ -26,18 +26,21 @@ public class Init {
 		LCD.clear();
 		
 		RS485Connection connection = RS485.waitForConnection(0, NXTConnection.PACKET);
+		LCD.drawString("00000000", 0, 0);
 		if (connection == null){
 			LCD.drawString("Error al", 0, 0);
 			LCD.drawString("Conectar", 0, 1);
 			Delay.msDelay(5000);
 			System.exit(1);
 		}
-		
+		LCD.drawString("11111111", 0, 0);
 		DataInputStream dis = connection.openDataInputStream();
         DataOutputStream dos = connection.openDataOutputStream();
+		LCD.drawString("22222222", 0, 0);
         Thread t = new Thread(shot);
         t.start();
         boolean running = true;
+		LCD.drawString("33333333", 0, 0);
         while (running){
 
 	        try{
