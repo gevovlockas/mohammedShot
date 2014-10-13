@@ -26,7 +26,6 @@ public class Init {
 		LCD.clear();
 		
 		RS485Connection connection = RS485.waitForConnection(0, NXTConnection.PACKET);
-		LCD.drawString("00000000", 0, 0);
 		if (connection == null){
 			LCD.drawString("Error al", 0, 0);
 			LCD.drawString("Conectar", 0, 1);
@@ -67,8 +66,5 @@ public class Init {
         LCD.drawString("Finished        ", 0, 3);
         Delay.msDelay(5000);
     }
-	
-	
-	
 	
 }

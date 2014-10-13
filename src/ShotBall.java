@@ -18,17 +18,19 @@ public class ShotBall implements Runnable {
 	private int value;
 	private boolean running;
 	
-	private void shot(int speedType){
+	private void shot(){
 		ColorSensor sensor = new ColorSensor(SensorPort.S1);
-		int measurement = 1;
+		int measurement = 0;
 		
 		int speed = HIGH_SPEED_ORANGE;
-		if(speedType==1){
+		if((value==1) || (value==-1)){
 			speed = SLOW_SPEED_ORANGE;
-		} else if(speedType==2){
+		} else if((value==2) || (value==-2)){
 			speed = MEDIUM_SPEED_ORANGE;
+		} else if(value==0){
+			Motor.A.stop();
 		}
-
+		
 		while (value != 0){
 			
 			Color color = sensor.getColor();
@@ -40,8 +42,8 @@ public class ShotBall implements Runnable {
 			switch (color.getColor()){
 				case Color.GREEN:
 					Motor.A.setSpeed(SPEED_BLUE);
+					measurement = value < 0? measurement - 1:  measurement + 1;
 					Motor.A.rotateTo(measurement * FULL_TURN);
-					measurement++;
 				break;
 				case Color.WHITE:
 					//Las celestes muy claras
@@ -49,8 +51,8 @@ public class ShotBall implements Runnable {
 							Motor.A.setSpeed(speed);
 						else						
 							Motor.A.setSpeed(SPEED_BLUE);
+						measurement = value < 0? measurement - 1:  measurement + 1;
 						Motor.A.rotateTo(measurement * FULL_TURN);
-					measurement++;
 				break;
 
 				case Color.BLACK:
@@ -59,8 +61,8 @@ public class ShotBall implements Runnable {
 							Motor.A.setSpeed(speed);
 						else						
 							Motor.A.setSpeed(SPEED_BLUE);
+						measurement = value < 0? measurement - 1:  measurement + 1;
 						Motor.A.rotateTo(measurement * FULL_TURN);
-						measurement++;
 					}
 					//sino es que vio nada y entonces no hace nada
 				break;
@@ -68,8 +70,8 @@ public class ShotBall implements Runnable {
 				default:
 					//Vio algo que no era pelotita azul ni celeste
 					Motor.A.setSpeed(speed);
+					measurement = value < 0? measurement - 1:  measurement + 1;
 					Motor.A.rotateTo(measurement * FULL_TURN);
-					measurement++;
 				break;	
 						
 			}
@@ -89,7 +91,7 @@ public class ShotBall implements Runnable {
 	public void run() {
 		while(running) {
 			if(value != 0){
-				shot(value);
+				shot();
 			} else {
 				Motor.A.stop();
 			}
