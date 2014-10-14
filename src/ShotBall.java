@@ -77,6 +77,9 @@ public class ShotBall implements Runnable {
 			}
 			//cambiar delay por while -30>tacho-360*medidas
 			Delay.msDelay(2200);
+			//while ((-30 > (Motor.A.getTachoCount() - 360 * measurement)) || (30 > (Motor.A.getTachoCount() - 360 * measurement))){
+				
+			//}
 		}
 		
 	}

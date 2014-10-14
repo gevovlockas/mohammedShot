@@ -32,14 +32,11 @@ public class Init {
 			Delay.msDelay(5000);
 			System.exit(1);
 		}
-		LCD.drawString("11111111", 0, 0);
 		DataInputStream dis = connection.openDataInputStream();
         DataOutputStream dos = connection.openDataOutputStream();
-		LCD.drawString("22222222", 0, 0);
         Thread t = new Thread(shot);
         t.start();
         boolean running = true;
-		LCD.drawString("33333333", 0, 0);
         while (running){
 
 	        try{
