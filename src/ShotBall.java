@@ -21,7 +21,10 @@ public class ShotBall implements Runnable {
 	private void shot(){
 		ColorSensor sensor = new ColorSensor(SensorPort.S1);
 		int measurement = 0;
-		
+		//CAMBIO
+		int util=0;
+		boolean viColor=false;
+		//FIN CAMBIO
 		int speed = HIGH_SPEED_ORANGE;
 		if((value==1) || (value==-1)){
 			speed = SLOW_SPEED_ORANGE;
@@ -42,17 +45,27 @@ public class ShotBall implements Runnable {
 			switch (color.getColor()){
 				case Color.GREEN:
 					Motor.A.setSpeed(SPEED_BLUE);
-					measurement = value < 0? measurement - 1:  measurement + 1;
-					Motor.A.rotateTo(measurement * FULL_TURN);
+					//CAMBIO
+					if(viColor){	
+						measurement = value < 0? measurement - 1:  measurement + 1;
+						Motor.A.rotateTo(measurement * FULL_TURN);
+					}
+					viColor=true;
+					//FIN CAMBIO
 				break;
 				case Color.WHITE:
 					//Las celestes muy claras
 					if(blue > red)
-							Motor.A.setSpeed(speed);
-						else						
-							Motor.A.setSpeed(SPEED_BLUE);
+						Motor.A.setSpeed(speed);
+					else						
+						Motor.A.setSpeed(SPEED_BLUE);
+					//CAMBIO
+					if(viColor){
 						measurement = value < 0? measurement - 1:  measurement + 1;
 						Motor.A.rotateTo(measurement * FULL_TURN);
+					}
+					viColor=true;	
+					//FIN CAMBIO
 				break;
 
 				case Color.BLACK:
@@ -61,25 +74,41 @@ public class ShotBall implements Runnable {
 							Motor.A.setSpeed(speed);
 						else						
 							Motor.A.setSpeed(SPEED_BLUE);
-						measurement = value < 0? measurement - 1:  measurement + 1;
-						Motor.A.rotateTo(measurement * FULL_TURN);
-					}
+						//CAMBIO
+						if(viColor){
+							measurement = value < 0? measurement - 1:  measurement + 1;
+							Motor.A.rotateTo(measurement * FULL_TURN);
+						}
+						viColor=true;
+						
+					}else
+						viColor=false;
+						//FIN CAMBIO
 					//sino es que vio nada y entonces no hace nada
 				break;
 
 				default:
+					//ES POSIBLE QUE SOLO SACANDO ESTO SE ARREGLARA, O QUEDARA BASTANTE MEJOR
 					//Vio algo que no era pelotita azul ni celeste
 					Motor.A.setSpeed(speed);
-					measurement = value < 0? measurement - 1:  measurement + 1;
-					Motor.A.rotateTo(measurement * FULL_TURN);
+					//CAMBIO
+					if(viColor){
+						measurement = value < 0? measurement - 1:  measurement + 1;
+						Motor.A.rotateTo(measurement * FULL_TURN);
+					}
+					viColor=true;
+					//FIN CAMBIO
 				break;	
 						
 			}
+			
 			//cambiar delay por while -30>tacho-360*medidas
-			Delay.msDelay(2200);
-			//while ((-30 > (Motor.A.getTachoCount() - 360 * measurement)) || (30 > (Motor.A.getTachoCount() - 360 * measurement))){
-				
-			//}
+			//CAMBIO
+			Delay.msDelay(1800);//Baje la cantidad ya que ahora mira 2 veces
+			/*do{ //CREO ASI FUNCA BIEN, CAMBIE LOS 0 POR 5, PERO IGUAL SIGUE SIENDO INESTABLE SI GIRA DEMASIADO, O SI ALGO LO MUEVE 
+				util=(Motor.A.getTachoCount() - 360 * measurement);
+			}while (((util > -30) && (-5>util)) || ((30 > util)&&(util>5)));*/
+			//FIN CAMBIO
 		}
 		
 	}
