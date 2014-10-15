@@ -21,7 +21,7 @@ public class Init {
 	 * 
 	 * */
 	public static void main(String[] args) {
-        int read = 0;
+        int value = 0;
         ShotBall shot = new ShotBall();
 		LCD.clear();
 		
@@ -40,12 +40,13 @@ public class Init {
         while (running){
 
 	        try{
-	        	read = dis.readInt();
-	        	shot.setValue(read);
-	            LCD.drawString("Read: ", 0, 2);
-	            LCD.drawString("" + read, 0, 3);
+	        	System.out.println("esperando valor");
+	        	value = dis.readInt();
+	        	System.out.println("llego valor");
+	        	shot.setValue(value);
+	            System.out.println("Value = " + value);
 	        }catch (IOException ioe){
-	            LCD.drawString("Read Exception ", 0, 5);
+	            System.out.println(ioe.getMessage());
 	        }
 
         }
