@@ -25,44 +25,28 @@ public class Init {
         ShotBall shot = new ShotBall();
 		LCD.clear();
 		
+		DataInputStream dis = null;
 		RS485Connection connection = RS485.waitForConnection(0, NXTConnection.PACKET);
 		if (connection == null){
-			LCD.drawString("Error al", 0, 0);
-			LCD.drawString("Conectar", 0, 1);
+			System.out.println("Error al conectar");
 			Delay.msDelay(5000);
 			System.exit(1);
 		}
-		DataInputStream dis = connection.openDataInputStream();
-        DataOutputStream dos = connection.openDataOutputStream();
+		dis = connection.openDataInputStream();
         Thread t = new Thread(shot);
         t.start();
-        boolean running = true;
-        while (running){
+        while (true){
 
 	        try{
-	        	System.out.println("esperando valor");
+	            System.out.println("Esperando valor");
 	        	value = dis.readInt();
-	        	System.out.println("llego valor");
 	        	shot.setValue(value);
 	            System.out.println("Value = " + value);
 	        }catch (IOException ioe){
-	            System.out.println(ioe.getMessage());
+	            System.out.println("Error al recivir datos");
 	        }
 
         }
-        
-        try{
-            LCD.drawString("Closing...    ", 0, 3);
-            dis.close();
-            dos.close();
-            connection.close();
-        }catch (IOException ioe){
-            LCD.drawString("Close Exception", 0, 5);
-            LCD.refresh();
-        }
-        
-        LCD.drawString("Finished        ", 0, 3);
-        Delay.msDelay(5000);
-    }
+	}
 	
 }
