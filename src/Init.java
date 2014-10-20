@@ -1,17 +1,9 @@
 
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
 import lejos.nxt.ColorSensor;
-import lejos.nxt.LCD;
 import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.ColorSensor.Color;
-import lejos.nxt.comm.NXTConnection;
-import lejos.nxt.comm.RS485;
-import lejos.nxt.comm.RS485Connection;
 import lejos.util.Delay;
 
 public class Init {
@@ -34,17 +26,6 @@ public class Init {
 	 * */
 	public static void main(String[] args) {
 		
-        int value = 0;
-		LCD.clear();
-		
-//		DataInputStream dis = null;
-//		RS485Connection connection = RS485.waitForConnection(0, NXTConnection.PACKET);
-//		if (connection == null){
-//			System.out.println("Error al conectar");
-//			Delay.msDelay(5000);
-//			System.exit(1);
-//		}
-//		dis = connection.openDataInputStream();
 		ShotBall shot = new ShotBall();
 		Thread t = new Thread(shot);
 		t.start();
@@ -63,7 +44,6 @@ public class Init {
 		ColorSensor sensor = new ColorSensor(SensorPort.S1);
 		int measurement = 0;
 		//CAMBIO
-		int util=0;
 		boolean viColor=false;
 		//FIN CAMBIO
 		int speed = HIGH_SPEED_ORANGE;
@@ -154,5 +134,5 @@ public class Init {
 		//Motor.A.stop();
 		
 	}
-	
+
 }
