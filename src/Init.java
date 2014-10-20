@@ -51,8 +51,6 @@ public class Init {
 			speed = SLOW_SPEED_ORANGE;
 		} else if((value==2) || (value==-2)){
 			speed = MEDIUM_SPEED_ORANGE;
-		} else if(value==0){
-			Motor.A.stop();
 		}
 		
 		for(int i=0; i < 2; i++) {
@@ -123,13 +121,7 @@ public class Init {
 						
 			}
 			
-			//cambiar delay por while -30>tacho-360*medidas
-			//CAMBIO
-			Delay.msDelay(950);//Baje la cantidad ya que ahora mira 2 veces
-			/*do{ //CREO ASI FUNCA BIEN, CAMBIE LOS 0 POR 5, PERO IGUAL SIGUE SIENDO INESTABLE SI GIRA DEMASIADO, O SI ALGO LO MUEVE 
-				util=(Motor.A.getTachoCount() - 360 * measurement);
-			}while (((util > -30) && (-5>util)) || ((30 > util)&&(util>5)));*/
-			//FIN CAMBIO
+			Delay.msDelay(950);
 		}
 		//Motor.A.stop();
 		

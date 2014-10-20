@@ -3,15 +3,9 @@
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import lejos.nxt.Button;
-import lejos.nxt.ColorSensor;
-import lejos.nxt.LCD;
-import lejos.nxt.ColorSensor.Color;
 import lejos.nxt.comm.NXTConnection;
 import lejos.nxt.comm.RS485;
 import lejos.nxt.comm.RS485Connection;
-import lejos.nxt.Motor;
-import lejos.nxt.SensorPort;
 import lejos.util.Delay;
 
 public class ShotBall implements Runnable {
