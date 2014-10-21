@@ -121,7 +121,7 @@ public class Init {
 						
 			}
 			
-			Delay.msDelay(950);
+			Delay.msDelay(550);
 		}
 		//Motor.A.stop();
 		
