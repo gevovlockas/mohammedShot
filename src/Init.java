@@ -14,6 +14,7 @@ public class Init {
 	private static int SLOW_SPEED_ORANGE = 500;
 	private static int HIGH_SPEED_ORANGE = 800;
 	private static int FULL_TURN = 120;
+	private static int HALF_TURN = FULL_TURN / 2;
 	
 	
 	
@@ -25,6 +26,12 @@ public class Init {
 	 * 
 	 * */
 	public static void main(String[] args) {
+		
+		//Inicio el sistema de tiro
+		Delay.msDelay(2000);
+		Motor.A.setSpeed(HIGH_SPEED_ORANGE);
+		Motor.A.rotate(HALF_TURN);
+		Motor.A.stop();
 		
 		ShotBall shot = new ShotBall();
 		Thread t = new Thread(shot);
