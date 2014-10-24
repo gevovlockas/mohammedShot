@@ -10,9 +10,9 @@ public class Init {
 
 	
 	private static int SPEED_BLUE = 80;
-	private static int MEDIUM_SPEED_ORANGE = 700;
-	private static int SLOW_SPEED_ORANGE = 500;
-	private static int HIGH_SPEED_ORANGE = 800;
+	private static int SLOW_SPEED_ORANGE = 350;
+	private static int MEDIUM_SPEED_ORANGE = 500;
+	private static int HIGH_SPEED_ORANGE = 520;
 	private static int FULL_TURN = 120;
 	private static int HALF_TURN = FULL_TURN / 2;
 	
@@ -41,6 +41,7 @@ public class Init {
         	action(shot.getValue());
         }
 	}
+
 	
 	public static void action(int value) {
         if(value == 0){
@@ -67,13 +68,14 @@ public class Init {
 			int red = color.getRed(); //green - 15 > azul
 			int green = color.getGreen();
 			int blue = color.getBlue();
+			System.out.println(red + " " + green + " " + blue);
 	
 			switch (color.getColor()){
 				case Color.GREEN:
 					Motor.A.setSpeed(SPEED_BLUE);
 					//CAMBIO
 					if(viColor){	
-						measurement = value < 0? measurement - 1:  measurement + 1;
+						measurement = ((value < 0)? measurement +1:  measurement -1);
 						Motor.A.rotateTo(measurement * FULL_TURN);
 					}
 					viColor=true;
@@ -81,30 +83,41 @@ public class Init {
 				break;
 				case Color.WHITE:
 					//Las celestes muy claras
-					if(blue > red)
+					if(blue > red){
+						
 						Motor.A.setSpeed(speed);
-					else						
+						if(viColor){
+							measurement = ((value < 0)? measurement - 1:  measurement + 1);
+							Motor.A.rotateTo(measurement * FULL_TURN);
+						}
+					}else{						
 						Motor.A.setSpeed(SPEED_BLUE);
-					//CAMBIO
-					if(viColor){
-						measurement = value < 0? measurement - 1:  measurement + 1;
-						Motor.A.rotateTo(measurement * FULL_TURN);
-					}
+						if(viColor){
+							measurement = ((value < 0)? measurement + 1:  measurement - 1);
+							Motor.A.rotateTo(measurement * FULL_TURN);
+						}
+					}//CAMBIO
+					
 					viColor=true;	
 					//FIN CAMBIO
 				break;
 
 				case Color.BLACK:
 					if((red > 20) && (blue > 20) && (green > 20)){//Vi algo
-						if((red > 90) && (blue > 90) && (green > 90))
+						if((red > 90) && (blue > 90) && (green > 90)){
 							Motor.A.setSpeed(speed);
-						else						
+							if(viColor){
+								measurement = ((value < 0)? measurement - 1:  measurement + 1);
+								Motor.A.rotateTo(measurement * FULL_TURN);
+							}
+						}else{						
 							Motor.A.setSpeed(SPEED_BLUE);
-						//CAMBIO
-						if(viColor){
-							measurement = value < 0? measurement - 1:  measurement + 1;
-							Motor.A.rotateTo(measurement * FULL_TURN);
-						}
+							if(viColor){
+								measurement = ((value < 0)? measurement + 1:  measurement - 1);
+								Motor.A.rotateTo(measurement * FULL_TURN);
+							}
+						}//CAMBIO
+						
 						viColor=true;
 						
 					}else
@@ -119,7 +132,7 @@ public class Init {
 					Motor.A.setSpeed(speed);
 					//CAMBIO
 					if(viColor){
-						measurement = value < 0? measurement - 1:  measurement + 1;
+						measurement = ((value < 0)? measurement - 1:  measurement + 1);
 						Motor.A.rotateTo(measurement * FULL_TURN);
 					}
 					viColor=true;
