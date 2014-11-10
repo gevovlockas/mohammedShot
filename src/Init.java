@@ -33,6 +33,10 @@ public class Init {
 		Motor.A.rotate(HALF_TURN);
 		Motor.A.stop();
 		
+		Motor.B.setSpeed(150);
+		Motor.B.rotate(130);
+		Motor.B.stop();
+		
 		ShotBall shot = new ShotBall();
 		Thread t = new Thread(shot);
 		t.start();
