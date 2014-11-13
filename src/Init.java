@@ -29,13 +29,13 @@ public class Init {
 		
 		//Inicio el sistema de tiro
 		Delay.msDelay(2000);
-		Motor.A.setSpeed(HIGH_SPEED_ORANGE);
-		Motor.A.rotate(HALF_TURN);
-		Motor.A.stop();
+		Constants.SHOOTER_MOTOR.setSpeed(HIGH_SPEED_ORANGE);
+		Constants.SHOOTER_MOTOR.rotate(HALF_TURN);
+		Constants.SHOOTER_MOTOR.stop();
 		
-		Motor.B.setSpeed(150);
-		Motor.B.rotate(130);
-		Motor.B.stop();
+		Constants.SENSOR_MOTOR.setSpeed(Constants.SPEED_SENSOR_MOTOR);
+		Constants.SENSOR_MOTOR.rotate(Constants.ANGLE_SENSOR_MOTOR);
+		Constants.SENSOR_MOTOR.stop();
 		
 		ShotBall shot = new ShotBall();
 		Thread t = new Thread(shot);
@@ -49,10 +49,10 @@ public class Init {
 	
 	public static void action(int value) {
         if(value == 0){
-        	Motor.A.stop();
+        	Constants.SHOOTER_MOTOR.stop();
         	return;
         }
-        Motor.A.resetTachoCount();
+        Constants.SHOOTER_MOTOR.resetTachoCount();
 		ColorSensor sensor = new ColorSensor(SensorPort.S1);
 		int measurement = 0;
 		//CAMBIO
@@ -80,7 +80,7 @@ public class Init {
 					//CAMBIO
 					if(viColor){	
 						measurement = ((value < 0)? measurement +1:  measurement -1);
-						Motor.A.rotateTo(measurement * FULL_TURN);
+						Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 					}
 					viColor=true;
 					//FIN CAMBIO
@@ -89,16 +89,16 @@ public class Init {
 					//Las celestes muy claras
 					if(blue > red){
 						
-						Motor.A.setSpeed(speed);
+						Constants.SHOOTER_MOTOR.setSpeed(speed);
 						if(viColor){
 							measurement = ((value < 0)? measurement - 1:  measurement + 1);
-							Motor.A.rotateTo(measurement * FULL_TURN);
+							Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 						}
 					}else{						
-						Motor.A.setSpeed(SPEED_BLUE);
+						Constants.SHOOTER_MOTOR.setSpeed(SPEED_BLUE);
 						if(viColor){
 							measurement = ((value < 0)? measurement + 1:  measurement - 1);
-							Motor.A.rotateTo(measurement * FULL_TURN);
+							Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 						}
 					}//CAMBIO
 					
@@ -109,16 +109,16 @@ public class Init {
 				case Color.BLACK:
 					if((red > 20) && (blue > 20) && (green > 20)){//Vi algo
 						if((red > 90) && (blue > 90) && (green > 90)){
-							Motor.A.setSpeed(speed);
+							Constants.SHOOTER_MOTOR.setSpeed(speed);
 							if(viColor){
 								measurement = ((value < 0)? measurement - 1:  measurement + 1);
-								Motor.A.rotateTo(measurement * FULL_TURN);
+								Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 							}
 						}else{						
-							Motor.A.setSpeed(SPEED_BLUE);
+							Constants.SHOOTER_MOTOR.setSpeed(SPEED_BLUE);
 							if(viColor){
 								measurement = ((value < 0)? measurement + 1:  measurement - 1);
-								Motor.A.rotateTo(measurement * FULL_TURN);
+								Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 							}
 						}//CAMBIO
 						
@@ -133,11 +133,11 @@ public class Init {
 				default:
 					//ES POSIBLE QUE SOLO SACANDO ESTO SE ARREGLARA, O QUEDARA BASTANTE MEJOR
 					//Vio algo que no era pelotita azul ni celeste
-					Motor.A.setSpeed(speed);
+					Constants.SHOOTER_MOTOR.setSpeed(speed);
 					//CAMBIO
 					if(viColor){
 						measurement = ((value < 0)? measurement - 1:  measurement + 1);
-						Motor.A.rotateTo(measurement * FULL_TURN);
+						Constants.SHOOTER_MOTOR.rotateTo(measurement * FULL_TURN);
 					}
 					viColor=true;
 					//FIN CAMBIO
