@@ -11,8 +11,8 @@ public class Init {
 	
 	private static int SPEED_BLUE = 80;
 	private static int SLOW_SPEED_ORANGE = 350;
-	private static int MEDIUM_SPEED_ORANGE = 500;
-	private static int HIGH_SPEED_ORANGE = 520;
+	private static int MEDIUM_SPEED_ORANGE = 430;
+	private static int HIGH_SPEED_ORANGE = 490;
 	private static int FULL_TURN = 120;
 	private static int HALF_TURN = FULL_TURN / 2;
 	
@@ -28,7 +28,7 @@ public class Init {
 	public static void main(String[] args) {
 		
 		//Inicio el sistema de tiro
-		Delay.msDelay(2000);
+//		Delay.msDelay(2000);
 		Constants.SHOOTER_MOTOR.setSpeed(HIGH_SPEED_ORANGE);
 		Constants.SHOOTER_MOTOR.rotate(HALF_TURN);
 		Constants.SHOOTER_MOTOR.stop();
